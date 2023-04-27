@@ -8,7 +8,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class 모의고사_Solution {
+class 모의고사_Solution {
     public int[] solution(int[] answers) {
         int[] score = {0,0,0};
         int[] sol1 = {1,2,3,4,5};
