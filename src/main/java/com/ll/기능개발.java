@@ -66,3 +66,24 @@ class 기능개발_Solution2 {
         return result.stream().mapToInt(Integer::intValue).toArray();
     }
 }
+
+class 기능개발_Solution3 {
+    public int[] solution(int[] progresses, int[] speeds) {
+        IntStream.range(0, progresses.length)
+                .forEach(i -> {
+                    // [7,3,9] -> [7,7,9]
+                    int day = (int) Math.ceil((100.0 - progresses[i]) / speeds[i]);
+                    progresses[i] = day;
+                    if (i > 0) progresses[i] = Math.max(progresses[i - 1], progresses[i]);
+                });
+
+        return Arrays
+                .stream(progresses)
+                .boxed()
+                .collect(Collectors.groupingBy(e -> e, LinkedHashMap::new, Collectors.counting()))
+                .values()
+                .stream()
+                .mapToInt(Long::intValue)
+                .toArray(); // [7,7,9] -> (7,7)  (9) -> [2,1]
+    }
+}
